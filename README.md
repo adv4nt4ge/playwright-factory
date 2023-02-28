@@ -11,9 +11,9 @@ locators easily by annotating fields.
 ```xml
 
 <dependency>
-    <groupId></groupId>
-    <artifactId></artifactId>
-    <version></version>
+    <groupId>io.github.adv4nt4ge</groupId>
+    <artifactId>playwright-factory</artifactId>
+    <version>1.0.0</version>
 </dependency>
 ```
 
