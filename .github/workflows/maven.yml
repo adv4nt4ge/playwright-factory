@@ -1,4 +1,4 @@
-name: Stagehand
+name: playwright-factory
 
 on:
   push:

@@ -1,4 +1,4 @@
-package io.github.uchagani.stagehand.annotations;
+package io.github.page.factory.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

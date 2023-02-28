@@ -1,4 +1,4 @@
-package io.github.uchagani.stagehand;
+package io.github.page.factory;
 
 import java.lang.reflect.Field;
 

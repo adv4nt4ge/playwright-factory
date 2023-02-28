@@ -4,35 +4,35 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.uchagani</groupId>
-    <artifactId>stagehand</artifactId>
-    <version>2.1.1-SNAPSHOT</version>
+    <groupId>io.github.adv4nt4ge</groupId>
+    <artifactId>playwright-factory</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <playwright.version>1.20.1</playwright.version>
+        <playwright.version>1.30.0</playwright.version>
     </properties>
 
     <scm>
-        <connection>scm:git:https://github.com/uchagani/stagehand.git</connection>
-        <developerConnection>scm:git:https://github.com/uchagani/stagehand.git</developerConnection>
-        <url>https://github.com/uchagani/stagehand</url>
+        <connection>scm:git:https://github.com/adv4nt4ge/playwright-factory.git</connection>
+        <developerConnection>scm:git:https://github.com/adv4nt4ge/playwright-factory.git</developerConnection>
+        <url>https://github.com/adv4nt4ge/playwright-factory</url>
     </scm>
 
-    <name>Stagehand</name>
-    <description>Stagehand helps create Page Objects for Playwright for Java</description>
-    <url>https://github.com/uchagani/stagehand</url>
+    <name>Playwright Factory</name>
+    <description>Solution helps create Page Objects for Playwright for Java</description>
+    <url>https://github.com/adv4nt4ge/playwright-factory</url>
     <licenses>
         <license>
             <name>MIT License</name>
-            <url>https://github.com/uchagani/stagehand/blob/main/LICENSE</url>
+            <url>https://github.com/adv4nt4ge/playwright-factory/blob/main/LICENSE</url>
         </license>
     </licenses>
 
     <developers>
         <developer>
-            <name>Umair Chagani</name>
+            <name>Dmytro Kovtunov</name>
             <roles>
                 <role>developer</role>
             </roles>
@@ -56,18 +56,6 @@
             <artifactId>playwright</artifactId>
             <version>${playwright.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.8.2</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.22.0</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
     <build>
