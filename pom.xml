@@ -105,6 +105,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
                 <version>3.0.1</version>
                 <executions>
                     <execution>
@@ -113,10 +116,6 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
-                        <configuration>
-                            <keyname>${gpg.keyname}</keyname>
-                            <passphraseServerId>${gpg.passphrase}</passphraseServerId>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>

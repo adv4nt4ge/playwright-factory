@@ -2,7 +2,7 @@
 
 *Page Objects for [Playwright Java](https://playwright.dev/java/) made easy!*
 
-Stagehand is a Java library that helps you create clean and readable Page Objects. Inspired
+Is a Java library that helps you create clean and readable Page Objects. Inspired
 by [Selenium's PageFactory](https://github.com/SeleniumHQ/selenium/wiki/PageFactory), solution allows you to create
 locators easily by annotating fields.
 
@@ -57,6 +57,8 @@ class and an instance of Playwright's [Page](https://playwright.dev/java/docs/pa
 ```java
     HomePage homePage=PageFactory.create(HomePage.class,page)
 ```
+The PageFactory can create an instance of any page that has a default constructor or a constructor with just a
+Playwright Page parameter.
 
 ```java
 
@@ -65,9 +67,6 @@ public void initElementsPageWithFieldDecorator() {
         PageFactory.initElements(homePage, new ElementFieldDecorator(page));
 }
 ```
-
-The PageFactory can create an instance of any page that has a default constructor or a constructor with just a
-Playwright Page parameter.
 
 ## Dependent Locators
 
