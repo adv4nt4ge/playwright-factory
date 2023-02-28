@@ -63,7 +63,7 @@ public class PageFactory {
     }
 
     private static void proxyFields(FieldDecorator decorator, Object pageObjectInstance, List<Class<?>> classes) {
-        List<String> fieldNamesAlreadyProxied = new ArrayList<>();
+        HashSet<String> fieldNamesAlreadyProxied = new HashSet<>();
         List<Field> fieldsWithDependencies = new ArrayList<>();
 
         for (Class<?> pageObjectClass : classes) {
