@@ -68,6 +68,15 @@ public void initElementsPageWithFieldDecorator() {
 }
 ```
 
+## Implementing Page Factory
+
+For an example of creating a test with Page Factory in your project
+- [Application](https://github.com/adv4nt4ge/playwright-factory/src/main/java/io/github/adv4nt4ge/common/Application.java)
+- [PageProducer](https://github.com/adv4nt4ge/playwright-factory/src/main/java/io/github/adv4nt4ge/common/page/pageproducer/PageProducer.java)
+- [PlaywrightPage](https://github.com/adv4nt4ge/playwright-factory/src/main/java/io/github/adv4nt4ge/common/page/PlaywrightPage.java)
+- [PlaywrightDocsPage](https://github.com/adv4nt4ge/playwright-factory/src/main/java/io/github/adv4nt4ge/common/page/PlaywrightDocsPage.java)
+- [PageFactoryTests](https://github.com/adv4nt4ge/playwright-factory/src/test/java/io/github/adv4nt4ge/common/tests/PageFactoryTests.java)
+
 ## Dependent Locators
 
 At times, you may want to find a locator that is under another locator. The way to do this in Playwright would
@@ -90,8 +99,8 @@ public class HomePage {
 }
 ```
 
-The value you pass to the `@Under` annotation should be the name of the parent Locator.
+The value you pass to the `@Under` annotation should be the name of the parent Locator. The child Locator must be public.   
 
 ## Requirements
 
-Stagehand requires Java 8+ and Playwright 1.20.0+.
+Solution requires Java 8+ and Playwright 1.30.0+.

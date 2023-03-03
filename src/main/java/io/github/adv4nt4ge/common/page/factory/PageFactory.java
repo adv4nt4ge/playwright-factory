@@ -1,9 +1,9 @@
-package io.github.page.factory;
+package io.github.adv4nt4ge.common.page.factory;
 
 import com.microsoft.playwright.Page;
-import io.github.page.factory.annotations.FindBy;
-import io.github.page.factory.annotations.Under;
-import io.github.page.factory.exeptions.InvalidParentLocatorException;
+import io.github.adv4nt4ge.common.page.factory.annotations.FindBy;
+import io.github.adv4nt4ge.common.page.factory.annotations.Under;
+import io.github.adv4nt4ge.common.page.factory.exeptions.InvalidParentLocatorException;
 
 
 import java.lang.reflect.Constructor;

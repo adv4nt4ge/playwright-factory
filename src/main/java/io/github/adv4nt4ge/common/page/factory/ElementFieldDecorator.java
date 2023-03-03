@@ -1,4 +1,4 @@
-package io.github.page.factory;
+package io.github.adv4nt4ge.common.page.factory;
 
 import com.microsoft.playwright.Page;
 

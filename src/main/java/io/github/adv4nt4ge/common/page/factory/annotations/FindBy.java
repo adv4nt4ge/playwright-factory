@@ -1,4 +1,4 @@
-package io.github.page.factory.annotations;
+package io.github.adv4nt4ge.common.page.factory.annotations;
 
 
 import java.lang.annotation.ElementType;

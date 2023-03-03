@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        java: [ '17' ]
+        java: [ '18' ]
         playwright: ['1.30.0']
     runs-on: ${{ matrix.os }}
     name: ${{matrix.os}} - Java ${{ matrix.java }} - Playwright ${{matrix.playwright}}
