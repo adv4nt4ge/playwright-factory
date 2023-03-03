@@ -71,11 +71,11 @@ public void initElementsPageWithFieldDecorator() {
 ## Implementing Page Factory
 
 For an example of creating a test with Page Factory in your project
-- [Application](https://github.com/adv4nt4ge/playwright-factory/src/main/java/io/github/adv4nt4ge/common/Application.java)
-- [PageProducer](https://github.com/adv4nt4ge/playwright-factory/src/main/java/io/github/adv4nt4ge/common/page/pageproducer/PageProducer.java)
-- [PlaywrightPage](https://github.com/adv4nt4ge/playwright-factory/src/main/java/io/github/adv4nt4ge/common/page/PlaywrightPage.java)
-- [PlaywrightDocsPage](https://github.com/adv4nt4ge/playwright-factory/src/main/java/io/github/adv4nt4ge/common/page/PlaywrightDocsPage.java)
-- [PageFactoryTests](https://github.com/adv4nt4ge/playwright-factory/src/test/java/io/github/adv4nt4ge/common/tests/PageFactoryTests.java)
+- [Application](https://github.com/adv4nt4ge/playwright-factory/blob/main/src/main/java/io/github/adv4nt4ge/common/Application.java)
+- [PageProducer](https://github.com/adv4nt4ge/playwright-factory/blob/main/src/main/java/io/github/adv4nt4ge/common/page/pageproducer/PageProducer.java)
+- [PlaywrightPage](https://github.com/adv4nt4ge/playwright-factory/blob/main/src/main/java/io/github/adv4nt4ge/common/page/PlaywrightPage.java)
+- [BasePage](https://github.com/adv4nt4ge/playwright-factory/blob/main/src/main/java/io/github/adv4nt4ge/common/page/BasePage.java)
+- [PageFactoryTests](https://github.com/adv4nt4ge/playwright-factory/blob/main/src/test/java/io/github/adv4nt4ge/common/tests/PageFactoryTests.java)
 
 ## Dependent Locators
 
