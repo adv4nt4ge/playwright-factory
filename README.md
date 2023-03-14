@@ -103,7 +103,7 @@ The value you pass to the `@Under` annotation should be the name of the parent L
 
 ## Iframes
 
-Stagehand gives you the ability to easily locate elements inside an Iframe by passing in a selector to find the Iframe:
+The solution allows you to quickly locate elements inside an Iframe by passing in a selector to find the Iframe:
 
 ```java
 
