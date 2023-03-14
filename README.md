@@ -101,6 +101,24 @@ public class HomePage {
 
 The value you pass to the `@Under` annotation should be the name of the parent Locator. The child Locator must be public.   
 
+## Iframes
+
+Stagehand gives you the ability to easily locate elements inside an Iframe by passing in a selector to find the Iframe:
+
+```java
+
+@Frame(frame = "#preview-iframe")
+public class PageIframe {
+    
+    @FindBy(testId = "some-id")
+    public Locator someButton;
+}
+```
+
+Any Locators defined inside a class that is decorated with `@Frame(frame = "X"` will be scoped to that Iframe.
+
+The above example is equivalent to Playwright's `page.frameLocator("#preview-iframe").getByTestId("some-id")`.
+
 ## Requirements
 
 Solution requires Java 8+ and Playwright 1.30.0+.

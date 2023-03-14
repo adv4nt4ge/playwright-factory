@@ -1,8 +1,10 @@
 package io.github.adv4nt4ge.common.page.factory;
 
+import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import io.github.adv4nt4ge.common.page.factory.annotations.FindBy;
+import io.github.adv4nt4ge.common.page.factory.annotations.Frame;
 import io.github.adv4nt4ge.common.page.factory.annotations.Under;
 
 import java.lang.reflect.Field;
@@ -18,13 +20,19 @@ public class LocatorFactory {
         Class<?> clazz = field.getDeclaringClass();
         FindBy findBy = field.getAnnotation(FindBy.class);
         Under underAnnotation = field.getAnnotation(Under.class);
+        Frame frameAnnotation = clazz.getAnnotation(Frame.class);
+
+        if (frameAnnotation != null && underAnnotation == null) {
+            FrameLocator frameLocator = page.frameLocator(frameAnnotation.frame());
+            return buildFrameChildLocator(findBy, frameLocator);
+        }
 
         if (underAnnotation == null) {
             return buildLocatorFromFindBy(findBy);
         }
 
-        Locator locator = getParentLocator(clazz, underAnnotation, pageObjectInstance);
-        return buildParentChildLocator(findBy, locator);
+        Locator parentLocator = getParentLocator(clazz, underAnnotation, pageObjectInstance);
+        return buildParentChildLocator(findBy, parentLocator);
 
     }
 
@@ -73,33 +81,66 @@ public class LocatorFactory {
         return null;
     }
 
-    protected Locator buildParentChildLocator(FindBy findBy, Locator locator) {
+    protected Locator buildParentChildLocator(FindBy findBy, Locator parentLocator) {
         if (!"".equals(findBy.testId())) {
-            return locator.getByTestId(findBy.testId());
+            return parentLocator.getByTestId(findBy.testId());
         }
 
         if (!"".equals(findBy.altText())) {
-            return locator.getByAltText(findBy.altText());
+            return parentLocator.getByAltText(findBy.altText());
         }
 
         if (!"".equals(findBy.label())) {
-            return locator.getByLabel(findBy.label());
+            return parentLocator.getByLabel(findBy.label());
         }
 
         if (!"".equals(findBy.placeholder())) {
-            return locator.getByPlaceholder(findBy.placeholder());
+            return parentLocator.getByPlaceholder(findBy.placeholder());
         }
 
         if (!"".equals(findBy.text())) {
-            return locator.getByText(findBy.text());
+            return parentLocator.getByText(findBy.text());
         }
 
         if (!"".equals(findBy.title())) {
-            return locator.getByTitle(findBy.title());
+            return parentLocator.getByTitle(findBy.title());
         }
 
         if (!"".equals(findBy.locator())) {
-            return locator.locator(findBy.locator());
+            return parentLocator.locator(findBy.locator());
+        }
+
+        // Fall through
+        return null;
+    }
+
+    protected Locator buildFrameChildLocator(FindBy findBy, FrameLocator frameLocator) {
+        if (!"".equals(findBy.testId())) {
+            return frameLocator.getByTestId(findBy.testId());
+        }
+
+        if (!"".equals(findBy.altText())) {
+            return frameLocator.getByAltText(findBy.altText());
+        }
+
+        if (!"".equals(findBy.label())) {
+            return frameLocator.getByLabel(findBy.label());
+        }
+
+        if (!"".equals(findBy.placeholder())) {
+            return frameLocator.getByPlaceholder(findBy.placeholder());
+        }
+
+        if (!"".equals(findBy.text())) {
+            return frameLocator.getByText(findBy.text());
+        }
+
+        if (!"".equals(findBy.title())) {
+            return frameLocator.getByTitle(findBy.title());
+        }
+
+        if (!"".equals(findBy.locator())) {
+            return frameLocator.locator(findBy.locator());
         }
 
         // Fall through
