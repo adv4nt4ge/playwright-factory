@@ -13,7 +13,7 @@ locators easily by annotating fields.
 <dependency>
     <groupId>io.github.adv4nt4ge</groupId>
     <artifactId>playwright-factory</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
