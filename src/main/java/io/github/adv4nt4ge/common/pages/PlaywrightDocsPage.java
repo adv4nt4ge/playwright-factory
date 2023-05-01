@@ -1,4 +1,4 @@
-package io.github.adv4nt4ge.common.page;
+package io.github.adv4nt4ge.common.pages;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -16,8 +16,7 @@ public class PlaywrightDocsPage extends BasePage {
         super(page, application);
     }
 
-    public PlaywrightDocsPage checkIsVisibleStartedButtons() {
+    public void checkIsVisibleStartedButtons() {
         Assertions.assertTrue(navigationLogo.isVisible());
-        return this;
     }
 }

@@ -3,7 +3,7 @@ package io.github.adv4nt4ge.common.page.pageproducer;
 
 import com.microsoft.playwright.Page;
 import io.github.adv4nt4ge.common.Application;
-import io.github.adv4nt4ge.common.page.BasePage;
+import io.github.adv4nt4ge.common.pages.BasePage;
 import io.github.adv4nt4ge.common.page.factory.ElementFieldDecorator;
 import io.github.adv4nt4ge.common.page.factory.PageFactory;
 import lombok.SneakyThrows;
