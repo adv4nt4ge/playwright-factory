@@ -10,8 +10,5 @@
         <module name="playwright-factory" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="playwright-factory" target="17" />
-    </bytecodeTargetLevel>
   </component>
 </project>

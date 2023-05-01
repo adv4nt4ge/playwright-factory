@@ -1,4 +1,4 @@
-package io.github.adv4nt4ge.common.page;
+package io.github.adv4nt4ge.common.pages;
 
 import com.microsoft.playwright.Page;
 import io.github.adv4nt4ge.common.Application;

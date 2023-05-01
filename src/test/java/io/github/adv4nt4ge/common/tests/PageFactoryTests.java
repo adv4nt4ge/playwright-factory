@@ -1,7 +1,7 @@
 package io.github.adv4nt4ge.common.tests;
 
 import io.github.adv4nt4ge.common.BaseTest;
-import io.github.adv4nt4ge.common.page.PlaywrightPage;
+import io.github.adv4nt4ge.common.pages.PlaywrightPage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

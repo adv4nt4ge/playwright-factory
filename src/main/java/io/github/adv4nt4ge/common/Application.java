@@ -1,7 +1,7 @@
 package io.github.adv4nt4ge.common;
 
 
-import io.github.adv4nt4ge.common.page.BasePage;
+import io.github.adv4nt4ge.common.pages.BasePage;
 import io.github.adv4nt4ge.common.page.pageproducer.PageProducer;
 
 public class Application {
