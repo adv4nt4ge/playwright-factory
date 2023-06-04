@@ -2,7 +2,7 @@ package io.github.adv4nt4ge.common.page.factory;
 
 import com.microsoft.playwright.Page;
 import io.github.adv4nt4ge.common.page.factory.annotations.FindBy;
-import io.github.adv4nt4ge.common.page.factory.annotations.Under;
+import io.github.adv4nt4ge.common.page.factory.annotations.Parent;
 import io.github.adv4nt4ge.common.page.factory.exeptions.InvalidParentLocatorException;
 
 import java.lang.reflect.Constructor;
@@ -139,7 +139,7 @@ public class PageFactory {
                 List<Field> proxiedScopedFields = new ArrayList<>();
 
                 for (Field field : fieldsWithDependencies) {
-                    List<String> dependencyNames = Collections.singletonList(field.getAnnotation(Under.class).value());
+                    List<String> dependencyNames = Collections.singletonList(field.getAnnotation(Parent.class).value());
 
                     if (fieldNamesAlreadyProxied.containsAll(dependencyNames)) {
                         setField(decorator, field, pageObjectInstance);
@@ -171,7 +171,7 @@ public class PageFactory {
      * @return true if the field has dependencies, false otherwise
      */
     private static boolean hasDependencies(Field field) {
-        return field.isAnnotationPresent(Under.class);
+        return field.isAnnotationPresent(Parent.class);
     }
 
     /**

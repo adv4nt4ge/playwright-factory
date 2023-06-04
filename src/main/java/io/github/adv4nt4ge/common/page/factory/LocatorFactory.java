@@ -1,11 +1,12 @@
 package io.github.adv4nt4ge.common.page.factory;
 
+import com.microsoft.playwright.ElementHandle;
 import com.microsoft.playwright.FrameLocator;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import io.github.adv4nt4ge.common.page.factory.annotations.FindBy;
 import io.github.adv4nt4ge.common.page.factory.annotations.Frame;
-import io.github.adv4nt4ge.common.page.factory.annotations.Under;
+import io.github.adv4nt4ge.common.page.factory.annotations.Parent;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.function.Function;
 public class LocatorFactory {
     Page page;
     FindBy findBy;
-    Under underAnnotation;
+    Parent parentAnnotation;
     Frame frameAnnotation;
     Class<?> clazz;
 
@@ -39,7 +40,7 @@ public class LocatorFactory {
     public void getAnnotation(Field field) {
         this.clazz = field.getDeclaringClass();
         this.findBy = field.getAnnotation(FindBy.class);
-        this.underAnnotation = field.getAnnotation(Under.class);
+        this.parentAnnotation = field.getAnnotation(Parent.class);
         this.frameAnnotation = clazz.getAnnotation(Frame.class);
     }
 
@@ -53,59 +54,56 @@ public class LocatorFactory {
     public Locator createLocator(Field field, Object pageObjectInstance) {
         getAnnotation(field);
 
-        if (frameAnnotation != null && underAnnotation == null) {
+        if (frameAnnotation != null && parentAnnotation == null) {
             FrameLocator frameLocator = page.frameLocator(frameAnnotation.frame());
             return buildLocator(findBy, frameLocator::getByTestId, frameLocator::getByAltText,
                     frameLocator::getByLabel, frameLocator::getByPlaceholder, frameLocator::getByText,
                     frameLocator::getByTitle, frameLocator::locator);
         }
 
-        if (underAnnotation == null) {
+        if (parentAnnotation == null) {
             return buildLocator(findBy, page::getByTestId, page::getByAltText,
                     page::getByLabel, page::getByPlaceholder, page::getByText,
                     page::getByTitle, page::locator);
         }
 
-        Locator parentLocator = getParentLocator(clazz, underAnnotation, pageObjectInstance);
+        Locator parentLocator = getParentLocator(clazz, parentAnnotation, pageObjectInstance);
         return buildLocator(findBy, parentLocator::getByTestId, parentLocator::getByAltText,
                 parentLocator::getByLabel, parentLocator::getByPlaceholder, parentLocator::getByText,
                 parentLocator::getByTitle, parentLocator::locator);
     }
 
     /**
-     * Creates a list of Locators based on the provided Field and page object instance.
+     * This method is responsible for creating a list of {@code ElementHandle} instances based on a specified field and
+     * page object instance. The method first retrieves the annotation of the field. If there's no parent annotation,
+     * it builds a locator using various getBy methods defined in the page class and performs a query selector to return all
+     * elements matching the readable locator string.
+     * <p>
+     * If there's a parent annotation, it retrieves the parent locator, builds a locator using it, and performs a query
+     * selector to return all elements matching the readable locator string.
      *
-     * @param field              the Field for which to create the list of Locators
-     * @param pageObjectInstance the instance of the page object for which to create the list of Locators
-     * @return the list of created Locators
+     * @param field              The field from which to create the locator list.
+     * @param pageObjectInstance The object instance of the page where the elements will be located.
+     * @return A list of {@code ElementHandle} instances representing the located elements on the page.
      */
-    public List<Locator> createLocatorList(Field field, Object pageObjectInstance) {
-        getAnnotation(field);
-
-        if (underAnnotation == null) {
-            return buildLocator(findBy, page::getByTestId, page::getByAltText,
-                    page::getByLabel, page::getByPlaceholder, page::getByText,
-                    page::getByTitle, page::locator).all();
-        }
-
-        Locator parentLocator = getParentLocator(clazz, underAnnotation, pageObjectInstance);
-        return buildLocator(findBy, parentLocator::getByTestId, parentLocator::getByAltText,
-                parentLocator::getByLabel, parentLocator::getByPlaceholder, parentLocator::getByText,
-                parentLocator::getByTitle, parentLocator::locator).all();
+    public List<ElementHandle> createLocatorList(Field field, Object pageObjectInstance) {
+        Locator element = createLocator(field, pageObjectInstance);
+        String readableLocator = getReadableLocator(element);
+        return page.querySelectorAll(readableLocator);
     }
 
     /**
      * Retrieves the parent Locator of the specified Class and Under annotation from the provided page object instance.
      *
      * @param clazz              the Class for which to retrieve the parent Locator
-     * @param underAnnotation    the Under annotation for which to retrieve the parent Locator
+     * @param parentAnnotation   the Under annotation for which to retrieve the parent Locator
      * @param pageObjectInstance the instance of the page object from which to retrieve the parent Locator
      * @return the parent Locator
      */
-    protected Locator getParentLocator(Class<?> clazz, Under underAnnotation, Object pageObjectInstance) {
+    protected Locator getParentLocator(Class<?> clazz, Parent parentAnnotation, Object pageObjectInstance) {
         Locator locator;
         try {
-            Field depField = clazz.getField(underAnnotation.value());
+            Field depField = clazz.getField(parentAnnotation.value());
             locator = (Locator) depField.get(pageObjectInstance);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e.getCause());
@@ -133,6 +131,7 @@ public class LocatorFactory {
                                    Function<String, Locator> getByLabel, Function<String, Locator> getByPlaceholder,
                                    Function<String, Locator> getByText, Function<String, Locator> getByTitle,
                                    Function<String, Locator> locator) {
+
         Map<String, Function<String, Locator>> findByMap = Map.of(
                 "testId", getByTestId,
                 "altText", getByAltText,
@@ -165,5 +164,16 @@ public class LocatorFactory {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    /**
+     * This method transforms a given Playwright Locator object into a readable String format.
+     *
+     * @param locator the Locator object to be transformed.
+     * @return a String representation of the locator, excluding the "Locator@" part from the toString representation.
+     * If the locator is null, it will return "Locator@".
+     */
+    private String getReadableLocator(Locator locator) {
+        return locator.toString().replace("Locator@", "");
     }
 }
