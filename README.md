@@ -13,7 +13,7 @@ locators easily by annotating fields.
 <dependency>
     <groupId>io.github.adv4nt4ge</groupId>
     <artifactId>playwright-factory</artifactId>
-    <version>1.2.0</version>
+    <version>1.2.1</version>
 </dependency>
 ```
 
@@ -44,7 +44,10 @@ public class HomePage {
     public Locator myLabel;
 
     @FindBy(title = "#some-id")
-    public Locator myTitle;
+    public Locator myTitle;    
+    
+    @FindBy(text = "#some-id")
+    public List<ElementHandle> myListText;
 
 }
 ```
@@ -80,7 +83,7 @@ For an example of creating a test with Page Factory in your project
 ## Dependent Locators
 
 At times, you may want to find a locator that is under another locator. The way to do this in Playwright would
-be: `page.locator("#parent").locator(".child")`. To define this you can use the `@Under` annotation:
+be: `page.locator("#parent").locator(".child")`. To define this you can use the `@Parent` annotation:
 
 ```java
 
@@ -93,13 +96,13 @@ public class HomePage {
     @FindBy(locator = "#some-id")
     public Locator childLocator;
 
-    @Under("parentLocator")
+    @Parent("parentLocator")
     @FindBy(placeholder = "#some-id")
     public Locator anotherChild;
 }
 ```
 
-The value you pass to the `@Under` annotation should be the name of the parent Locator. The child Locator must be public.   
+The value you pass to the `@Parent` annotation should be the name of the parent Locator. The child Locator must be public.   
 
 ## Iframes
 
